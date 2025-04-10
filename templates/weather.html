@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather for {{ weather.city_name }}</title>
+     <style>
+         body { font-family: sans-serif; max-width: 500px; margin: 50px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+         h1, h2 { text-align: center; }
+         .weather-info { margin-top: 20px; }
+         .weather-info p { margin: 8px 0; }
+         .weather-icon img { vertical-align: middle; }
+         .back-link { display: block; text-align: center; margin-top: 20px; }
+     </style>
+</head>
+<body>
+    <h1>Weather Report</h1>
+    <h2>{{ weather.city_name }}{% if weather.country %}, {{ weather.country }}{% endif %}</h2>
+
+    <div class="weather-info">
+        {% if weather.icon %}
+        <p class="weather-icon">
+            Current Conditions:
+            {{ weather.description|title }} </p>
+        {% else %}
+        <p>Conditions: {{ weather.description|title }}</p>
+        {% endif %}
+
+        <p>Temperature: {{ weather.temp }}°C</p>
+        <p>Feels Like: {{ weather.feels_like }}°C</p>
+        <p>Humidity: {{ weather.humidity }}%</p>
+        <p>Wind Speed: {{ weather.wind_speed }} m/s</p>
+        <p>Pressure: {{ weather.pressure }}</p>
+        <p>Sunset: {{ weather.sunset }}</p>
+        <p>Sunrise: {{ weather.sunrise }}</p>
+        <p><small>Report Time (UTC): {{ weather.report_time_utc.strftime('%Y-%m-%d %H:%M:%S') }}</small></p>
+    </div>
+
+    <a href="{{ url_for('index') }}" class="back-link">Check another city</a>
+     </body>
+</html>
